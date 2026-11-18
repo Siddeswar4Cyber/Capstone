@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ppfcl-nids"
+version = "0.1.0"
+description = "Research prototype for privacy-preserving federated continual intrusion detection"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+audit = ["numpy>=1.26,<3", "pandas>=3,<4"]
+model = ["numpy>=1.26,<3", "torch>=2.5,<3"]
+learning = ["numpy>=1.26,<3", "torch>=2.5,<3", "opacus>=1.5,<2"]
+# Retained for compatibility with the planned API service environment.
+api = ["fastapi>=0.115,<1", "uvicorn>=0.32,<1", "httpx>=0.27,<1"]
+ssh = ["paramiko>=3.5,<6"]
+dashboard = ["numpy>=1.26,<3", "torch>=2.5,<3", "opacus>=1.5,<2"]
+inference = ["numpy>=1.26,<3", "torch>=2.5,<3"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"ppfcl_nids.dashboard" = ["frontend/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["project_archive/tests"]
+pythonpath = ["src", "project_archive", "project_archive/src"]
+addopts = "--import-mode=importlib"
